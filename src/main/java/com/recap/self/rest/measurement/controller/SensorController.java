@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/sensor")
+@RequestMapping("/sensors")
 public class SensorController {
 
     private final SensorService sensorService;
@@ -29,7 +29,7 @@ public class SensorController {
         this.mapper = mapper;
     }
 
-    @PostMapping
+    @PostMapping("/registration")
     public ResponseEntity<SensorDTO> register(@RequestBody @Valid SensorDTO sensorDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw ValidationExceptionBuilder.builder().addErrors(bindingResult.getFieldErrors()).build();
