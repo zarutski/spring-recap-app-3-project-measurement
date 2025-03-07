@@ -1,5 +1,6 @@
 package com.recap.self.rest.measurement.service;
 
+import com.recap.self.rest.measurement.dto.MeasurementResponse;
 import com.recap.self.rest.measurement.exception.SensorDoesNotRegisteredException;
 import com.recap.self.rest.measurement.model.Measurement;
 import com.recap.self.rest.measurement.model.Sensor;
@@ -44,5 +45,9 @@ public class MeasurementService {
     private Sensor findRegistered(String name) {
         return sensorService.findByName(name)
                 .orElseThrow(() -> new SensorDoesNotRegisteredException(String.format("Sensor [%s] doesn't registered", name)));
+    }
+
+    public MeasurementResponse getRainyDaysCount() {
+        return new MeasurementResponse(repository.countByRainingIsTrue());
     }
 }

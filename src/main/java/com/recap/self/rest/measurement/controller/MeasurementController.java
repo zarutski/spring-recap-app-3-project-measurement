@@ -1,6 +1,7 @@
 package com.recap.self.rest.measurement.controller;
 
 import com.recap.self.rest.measurement.dto.MeasurementDTO;
+import com.recap.self.rest.measurement.dto.MeasurementResponse;
 import com.recap.self.rest.measurement.exception.ValidationExceptionBuilder;
 import com.recap.self.rest.measurement.model.Measurement;
 import com.recap.self.rest.measurement.service.MeasurementService;
@@ -46,6 +47,11 @@ public class MeasurementController {
         return new ResponseEntity<>(measurementService.findAll().stream()
                 .map(this::convertToDTO)
                 .toList(), HttpStatus.OK);
+    }
+
+    @GetMapping("/rainyDaysCount")
+    public ResponseEntity<MeasurementResponse> getRainyDaysCount() {
+        return new ResponseEntity<>(measurementService.getRainyDaysCount(), HttpStatus.OK);
     }
 
     private MeasurementDTO convertToDTO(Measurement measurement) {
